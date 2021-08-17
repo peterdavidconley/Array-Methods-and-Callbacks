@@ -48,7 +48,7 @@ Use the higher-order function called getYears to do the following:
 2. Receive a callback function getFinals from task 2 
 3. Return an array called years containing all of the years in the getFinals data set*/
 
-// parameters are data that will 
+
 function getYears(array, getFinalsCB) {
     const finalsArray = getFinalsCB(array)
     const years = finalsArray.map(function (element) {
@@ -82,8 +82,6 @@ function getWinners(array, getFinalsCB) {
     return winners
 }
 
-
-
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Use the higher-order function getWinnersByYear to do the following:
 1. Receive an array
@@ -94,15 +92,17 @@ Use the higher-order function getWinnersByYear to do the following:
 hint: the strings returned need to exactly match the string in step 4.
  */
  
-function getWinnersByYear(fifaArray, getYearsCB, getWinnersCB) {
+function getWinnersByYear(array, getYearsCB, getWinnersCB) {
     const arrayStrings = []
+    const winnersAndYears = []
+    const arrayYears = getYearsCB(array, getFinals)
+    const arrayWinners = getWinnersCB(array, getFinals)
 
-    // use map here with item and index
+    // Populate array winnersAndYears with the objects {Winner: "", Year: ""}
 
-    // map over winners, use index to refer to the year and use item to refer to the current value in winners
-
-    //arrayStrings.push(`In ${item.Year}, ${item.country} won the world cup!`)
-
+    winnersAndYears.forEach(function (item) {
+        arrayStrings.push(`In ${item.Year}, ${item.Winner} won the world cup!`)
+    })
     return arrayStrings
 }
 
@@ -119,11 +119,15 @@ Use the higher order function getAverageGoals to do the following:
 */
 
 // receive getFinalsCB from task 2, and return average number of hometeam goals rounded to second decimal place
-function getAverageGoals(/* code here */) {
-   /* code here */
-   // use .reduce - add up all home team and away team goals then divide by length of data set
-   // 2 steps
-   // .toFixed(2) method for rounding to two decimal places 
+function getAverageGoals(getFinalsCB) {
+    
+    const finalsArray = getFinalsCB(fifaData)
+
+    const totalGoals = finalsArray.reduce(function (total, currentGame) {
+        return total + currentGame["Away Team Goals"] + currentGame["Home Team Goals"]
+    }, 0)
+   
+   return (totalGoals/finalsArray.length).toFixed(2)
 }
 
 
