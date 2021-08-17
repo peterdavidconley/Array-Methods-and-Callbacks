@@ -73,7 +73,7 @@ function getWinners(array, getFinalsCB) {
     const winners = []
     finalsArray.forEach(function(item) {
         if (item["Away Team Goals"] > item["Home Team Goals"]) {
-            winners.push("Away Team Name")
+            winners.push(item["Away Team Name"])
         }
         else if (item["Away Team Goals"] < item["Home Team Goals"]) {
             winners.push(item["Home Team Name"])
@@ -102,7 +102,7 @@ function getWinnersByYear(fifaArray, getYearsCB, getWinnersCB) {
     // map over winners, use index to refer to the year and use item to refer to the current value in winners
 
     //arrayStrings.push(`In ${item.Year}, ${item.country} won the world cup!`)
-    
+
     return arrayStrings
 }
 
