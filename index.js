@@ -93,19 +93,20 @@ hint: the strings returned need to exactly match the string in step 4.
  */
  
 function getWinnersByYear(array, getYearsCB, getWinnersCB) {
-    const arrayStrings = []
-    const winnersAndYears = []
+    
     const arrayYears = getYearsCB(array, getFinals)
+    console.log(arrayYears)
     const arrayWinners = getWinnersCB(array, getFinals)
-
+    console.log(arrayWinners)
     // Populate array winnersAndYears with the objects {Winner: "", Year: ""}
 
-    winnersAndYears.forEach(function (item) {
-        arrayStrings.push(`In ${item.Year}, ${item.Winner} won the world cup!`)
+    return arrayWinners.map(function(item, index) {
+        return `In ${arrayYears[index]}, ${item} won the world cup!`
     })
-    return arrayStrings
+    //return arrayStrings
 }
 
+console.log("task 5", getWinnersByYear(fifaData, getYears, getWinners))
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -121,16 +122,16 @@ Use the higher order function getAverageGoals to do the following:
 // receive getFinalsCB from task 2, and return average number of hometeam goals rounded to second decimal place
 function getAverageGoals(getFinalsCB) {
     
-    const finalsArray = getFinalsCB(fifaData)
+    //const finalsArray = getFinalsCB(fifaData)
 
-    const totalGoals = finalsArray.reduce(function (total, currentGame) {
-        return total + currentGame["Away Team Goals"] + currentGame["Home Team Goals"]
+    const totalGoals = getFinalsCB.reduce(function (acc, item) {
+        return acc + item["Away Team Goals"] + item["Home Team Goals"];
     }, 0)
    
-   return (totalGoals/finalsArray.length).toFixed(2)
+   return (totalGoals / getFinalsCB.length).toFixed(2)
 }
 
-
+console.log("task 6", getAverageGoals(getFinals(fifaData)))
 
 
 /// 🥅 STRETCH 🥅 ///
